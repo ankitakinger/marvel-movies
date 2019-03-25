@@ -28,6 +28,10 @@ img{
   border-radius: 10px;
 }
 
+.Danger{
+  color: red;
+}
+
 #overlap{
   position: relative;
   top: 30px;

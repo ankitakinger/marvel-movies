@@ -8,14 +8,31 @@ const BACKDROP_PATH = 'http://image.tmdb.org/t/p/w1280';
 
 class MovieDetail extends Component{
 
+    state = {
+        isLoading: true
+    }
+
     componentDidMount(){
         this.props.fetchDetails(this.props.match.params.id);
     }
 
+    componentWillReceiveProps(nextProps){
+        if(nextProps.movie === this.props.movie){
+            this.setState({
+                isLoading: true
+            })
+        }
+        else{
+            this.setState({
+                isLoading: false
+            })
+        }
+    }
+
     render(){
-        let movie_details = null;
+        let movie_details = this.state.isLoading ? <h2 style={{color:"green", fontSize: '40px'}}>Loading...</h2> : null;
         if(this.props.movie)
-            movie_details = (
+            movie_details = this.state.isLoading ? <h2 style={{color:"green", fontSize: '40px'}}>Loading...</h2> : (
                 <div>
                     <div 
                         id="backdrop"
@@ -48,11 +65,11 @@ class MovieDetail extends Component{
         return (
             this.props.movie !== undefined ? 
                 movie_details : 
-                <div style={{margin: "20%", fontSize: "50px", color: "cyan"}}>
+                <h2 style={{margin: "30%"}} className="Danger">
                     {!this.props.err ?
                     "Movie does not exist!!"
-                    : "Loading..."}
-                </div>
+                    : null}
+                </h2>
         );
     }
 }
