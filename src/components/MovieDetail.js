@@ -39,7 +39,7 @@ class MovieDetail extends Component{
                                 value={this.props.movie.vote_average} 
                                 name="rating"
                                 emptyStarColor="white"/>
-                            <h3>Release Date: {this.props.movie.release_date}</h3>
+                            <h3 style={{margin: '0'}}>Release Date: {this.props.movie.release_date}</h3>
                             <p>{this.props.movie.overview}</p>
                         </div>
                         </div>
@@ -48,9 +48,11 @@ class MovieDetail extends Component{
         return (
             this.props.movie !== undefined ? 
                 movie_details : 
-                <div style={{margin: "20%", fontSize: "50px", color: "cyan"}}>{!this.props.err ?
+                <div style={{margin: "20%", fontSize: "50px", color: "cyan"}}>
+                    {!this.props.err ?
                     "Movie does not exist!!"
-                    : "Loading..."}</div>
+                    : "Loading..."}
+                </div>
         );
     }
 }
@@ -58,7 +60,8 @@ class MovieDetail extends Component{
 const mapStateToProps = state => {
     return {
         movie: state.movie,
-        err: state.err
+        err: state.err,
+        loading: state.loading
     }
 }
 

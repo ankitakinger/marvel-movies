@@ -13,7 +13,9 @@ class MoviesGrid extends Component{
         return (
             <div>
                 {this.props.err ? <h2 style={{ color: "red"}}>{this.props.err.message}</h2> : 
-                this.props.movies.map(movie => <Movie movie={movie} key={movie.id}/>)
+                (this.props.movies) instanceof Array ?
+                this.props.movies.map(movie => <Movie movie={movie} key={movie.id}/>) :
+                <h2 style={{color: 'red'}}>{this.props.movies}</h2>
                 }
             </div>
         );

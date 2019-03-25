@@ -16,15 +16,18 @@ const reducer = (state=initialStore, action) => {
                         return ((movie.original_title).toUpperCase()).match(action.search.toUpperCase());
                     });
                 }
-                if(action.option === 'language'){
+                else if(action.option === 'language'){
                     result = result.filter((movie) => {
                         return ((movie.original_language).toUpperCase()).match(action.search.toUpperCase().substr(0,2));
                     });
                 }
-                if(action.option === 'vote'){
+                else if(action.option === 'vote'){
                     result = result.filter((movie) => {
                         return movie.vote_average === parseFloat(action.search);
                     });
+                }
+                if(result.length === 0){
+                    result = "Your search '" + action.search + "' doesn't match any results!!"; 
                 }
             }
             return {
