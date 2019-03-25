@@ -9,9 +9,27 @@ const initialStore = {
 const reducer = (state=initialStore, action) => {
     switch(action.type){
         case types.FETCH_MOVIES:
+            let result = action.movies;
+            if(action.search){
+                if(action.option === 'title'){
+                    result = result.filter((movie) => {
+                        return ((movie.original_title).toUpperCase()).match(action.search.toUpperCase());
+                    });
+                }
+                if(action.option === 'language'){
+                    result = result.filter((movie) => {
+                        return ((movie.original_language).toUpperCase()).match(action.search.toUpperCase().substr(0,2));
+                    });
+                }
+                if(action.option === 'vote'){
+                    result = result.filter((movie) => {
+                        return movie.vote_average === parseFloat(action.search);
+                    });
+                }
+            }
             return {
                 ...state,
-                movies: action.movies
+                movies: result
             }
         case types.FETCH_MOVIE_DETAILS:
             return {

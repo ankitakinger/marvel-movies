@@ -6,7 +6,7 @@ import {fetchMovies} from '../store/actions/actions';
 class MoviesGrid extends Component{
 
     componentDidMount(){
-        this.props.onFetchingMovies();
+        this.props.fetchMovies();
     }
 
     render(){
@@ -29,7 +29,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchingMovies: () => dispatch(fetchMovies())
+        fetchMovies: () => dispatch(fetchMovies())
     }
 }
 

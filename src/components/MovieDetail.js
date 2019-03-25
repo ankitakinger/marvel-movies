@@ -9,7 +9,7 @@ const BACKDROP_PATH = 'http://image.tmdb.org/t/p/w1280';
 class MovieDetail extends Component{
 
     componentDidMount(){
-        this.props.onFetchingDetails(this.props.match.params.id);
+        this.props.fetchDetails(this.props.match.params.id);
     }
 
     render(){
@@ -64,7 +64,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetchingDetails: (id) => dispatch(fetchMovieDetails(id))
+        fetchDetails: (id) => dispatch(fetchMovieDetails(id))
     }
 }
 

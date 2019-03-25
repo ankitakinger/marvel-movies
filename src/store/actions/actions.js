@@ -1,44 +1,22 @@
 import * as types from './actionTypes';
 import axios from 'axios';
 
-export const fetchedMovies = (movies) => {
+export const fetchedMovies = (movies,search,option) => {
     return {
         type: types.FETCH_MOVIES,
-        movies
+        movies,
+        search,
+        option
     }
 }
 
 
-export const fetchMovies = (search,op) => {
+export const fetchMovies = (search,option) => {
     return dispatch => {
-        const radios = document.getElementsByTagName('input');
-        let option;
-        for (let i = 0; i < radios.length; i++) {
-            if (radios[i].type === 'radio' && radios[i].checked) {
-                option = radios[i].value; 
-            }
-        }
         axios.get('https://api.themoviedb.org/4/list/1?page=1&api_key=bd0830ad7ef334b313907c035d767bd1')
             .then( movies => {
                 let result = movies.data.results;
-                if(search){
-                    if(option === 'title'){
-                        result = result.filter((movie) => {
-                            return ((movie.original_title).toUpperCase()).match(search.toUpperCase());
-                        });
-                    }
-                    if(option === 'language'){
-                        result = result.filter((movie) => {
-                            return ((movie.original_language).toUpperCase()).match(search.toUpperCase().substr(0,2));
-                        });
-                    }
-                    if(option === 'vote'){
-                        result = result.filter((movie) => {
-                            return movie.vote_average === parseFloat(search);
-                        });
-                    }
-                }
-                dispatch(fetchedMovies(result));
+                dispatch(fetchedMovies(result,search,option));
             })
             .catch( e => {
                 dispatch(fetchFailed(e));

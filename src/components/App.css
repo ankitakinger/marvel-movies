@@ -13,7 +13,7 @@ a{
 }
 
 input{
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   line-height: 30px;
 }
 
@@ -48,11 +48,6 @@ img{
   background-color: rgba(105,105,105,0.5);
 }
 
-#searched{
-  text-align: left;
-  margin-left: 45%;
-}
-
 #backdrop{
   position: absolute;
   height: 100%;
@@ -62,13 +57,13 @@ img{
   opacity: 0.2;
 }
 
+.select{
+  margin:25px;
+  margin-right: 5px;
+}
+
 @media (max-width: 570px){
   #backdrop{
     background: black !important;
-  }
-
-  #searches{
-    text-align: left;
-    margin-left: 30%;
   }
 }

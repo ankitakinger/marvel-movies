@@ -4,8 +4,20 @@ import {fetchMovies} from '../store/actions/actions';
 
 const search = (props) => {
 
+    let option;
+
     const search = (e) => {
-        props.onFetching(e.target.value);
+        searchOptionSelected();
+        props.fetchMovies(e.target.value,option);
+    }
+
+    const searchOptionSelected = () => {
+        const radios = document.getElementsByTagName('input');
+        for (let i = 0; i < radios.length; i++) {
+            if (radios[i].type === 'radio' && radios[i].checked) {
+                option = radios[i].value; 
+            }
+        }
     }
 
     return (
@@ -16,10 +28,10 @@ const search = (props) => {
                 size="50" 
                 onChange={search} />
             <br />
-            <div id="searches">
-                <input type="radio" name="search" value ="title"/>Search by Title <br />
-                <input type="radio" name="search" value ="language" />Search by Language <br />
-                <input type="radio" name="search" value ="vote" />Search by Rating <br />
+            <div>Search by : <br />
+                <input type="radio" className="select" name="search" value ="title" checked onChange={searchOptionSelected}/>Title
+                <input type="radio" className="select" name="search" value ="language" onChange={searchOptionSelected} />Language
+                <input type="radio" className="select" name="search" value ="vote" onChange={searchOptionSelected} />Rating
             </div>
         </div>
     );
@@ -27,7 +39,7 @@ const search = (props) => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onFetching : (search) => dispatch(fetchMovies(search))
+        fetchMovies : (search,option) => dispatch(fetchMovies(search,option))
     }
 }
 
